@@ -1,9 +1,59 @@
 import lector_csv
 import grafica
 
+listo = False
+while( not listo ):
+
+    try:
+
+        print('1.Poblacion Mundial\n2.Poblacion de un continente especifico')
+        opcion = int(input('Ingrese la opcion: '))
+        
+        if opcion <= 0 or opcion > 2:
+
+            print('\n\ningrese un numero relacionado con las opciones disponibles\n\n')
+
+        else:
+
+            listo = True
+
+    except ValueError as error:
+        print('\n\ningrese un entero\n\n')
+
 datos = lector_csv.read_csv('./new_proyect/data.csv') 
 
-#datos = list( filter(lambda item : item['Continent'] == 'Europe', datos ) )
+def continente():
+
+    lista_continentes =[ 'Africa', 'Asia', 'Europe','North America', 'South America', 'Oceania'] 
+    
+    listo = False
+
+    while(not listo):
+
+        try:
+
+            print('1.Africa\n2.Asia\n3.Europe\n4.North America\n5.South America\n6.Oceania')
+            opcion = int(input('Ingrese la opcion: '))
+
+            if opcion <= 0 or opcion > 6:
+
+                print('\n\ningrese un numero relacionado con las opciones disponibles\n\n')
+
+            else:
+
+                listo = True
+
+        except ValueError as error:
+
+            print('\n\ningrese un entero\n\n')
+
+    return lista_continentes[opcion-1]
+
+if opcion == 2:
+
+    continente_var = continente()
+
+    datos = list( filter(lambda item : item['Continent'] == continente_var, datos ) )
 
 pais = []
 poblacion = []
